@@ -722,7 +722,16 @@ body.nav-open .burger span:nth-child(3) { transform: rotate(-45deg); }
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 .gallery figure { margin: 0; position: relative; overflow: hidden; background: var(--ink-soft); }
-.gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 900ms var(--ease); }
+/* height:100% makes a square photo fill a tile the grid has stretched taller,
+   instead of leaving the figure background showing beneath it. On a single
+   column the figure height is auto, so aspect-ratio takes over again. */
+.gallery img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 900ms var(--ease);
+}
 .gallery figure:hover img { transform: scale(1.04); }
 .gallery figcaption {
   position: absolute;
