@@ -27,6 +27,77 @@
     });
   }
 
+  /* contact form
+     FFM_CONTACT_ENDPOINT is set in config.js once hosting is live. Until then the
+     form tells the truth instead of pretending the message went somewhere. */
+  var form = document.getElementById("contact-form");
+  if (form) {
+    var status = document.getElementById("form-status");
+    var say = function (msg, ok) {
+      status.textContent = msg;
+      status.classList.add("is-shown");
+      status.classList.toggle("is-ok", !!ok);
+    };
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      if (form.website.value) return; // honeypot: quietly drop bots
+
+      var missing = ["name", "email", "subject", "message"].filter(function (k) {
+        return !form[k].value.trim();
+      });
+      if (missing.length) {
+        say("Please fill in your name, email, subject and message.");
+        form[missing[0]].focus();
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) {
+        say("That email address doesn't look right — mind checking it?");
+        form.email.focus();
+        return;
+      }
+
+      var endpoint = window.FFM_CONTACT_ENDPOINT;
+      if (!endpoint) {
+        say(
+          "This form isn't connected to email yet. In the meantime please write " +
+            "to frontlinefaithmissions@gmail.com and we'll come straight back to you."
+        );
+        return;
+      }
+
+      var btn = form.querySelector("button[type=submit]");
+      btn.disabled = true;
+      say("Sending…");
+
+      fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          subject: form.subject.value.trim(),
+          message: form.message.value.trim()
+        })
+      })
+        .then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          form.reset();
+          say("Thank you — your message is on its way. We'll be in touch soon.", true);
+        })
+        .catch(function () {
+          say(
+            "Something went wrong sending that. Please email " +
+              "frontlinefaithmissions@gmail.com directly and we'll pick it up there."
+          );
+        })
+        .then(function () {
+          btn.disabled = false;
+        });
+    });
+  }
+
   /* scroll reveals (hero animates on load instead) */
   var targets = document.querySelectorAll(".rise:not(.hero .rise)");
   if (!("IntersectionObserver" in window)) {

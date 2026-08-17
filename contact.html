@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact &mdash; Frontline Faith Missions</title>
+<meta name="description" content="Get in touch with Frontline Faith Missions about volunteering, joining a trip, sponsoring a mission or donating supplies.">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/favicon-512.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr__in">
+    <a class="brand" href="index.html">
+      <img src="assets/img/mark-white.png" alt="">
+      <span class="brand__txt">Frontline Faith<span>Missions</span></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="about.html">Our Story</a>
+      <a href="what-we-do.html">What We Do</a>
+      <a href="get-involved.html">Get Involved</a>
+      <a href="photos.html">Photos</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <a class="btn" href="give.html">Give<span class="arw">&rarr;</span></a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="phero">
+    <div class="wrap">
+      <p class="eyebrow rise">Contact us</p>
+      <h1 class="rise">Tell us what you&rsquo;re carrying.</h1>
+      <p class="lede rise">Questions about a trip, volunteering, sponsoring a mission or donating supplies &mdash; send it over and we will come back to you.</p>
+    </div>
+  </section>
+
+  <section class="section section--bone" style="padding-top:clamp(3rem,6vw,4.5rem)">
+    <div class="wrap contact-grid">
+      <div>
+        <form id="contact-form" novalidate>
+          <div class="form-grid">
+            <div class="field field--wide">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field field--wide">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+            <div class="field field--wide">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="field field--wide">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <div class="field field--wide" aria-hidden="true" style="position:absolute;left:-9999px">
+              <label for="website">Leave this field empty</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+          </div>
+          <p style="margin-top:2rem"><button class="btn" type="submit">Send Message<span class="arw">&rarr;</span></button></p>
+          <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+          <p class="form-note">We read every message. Replies usually come within a couple of days.</p>
+        </form>
+      </div>
+
+      <div>
+        <p class="eyebrow rise">Direct</p>
+        <dl style="margin:0">
+          <div class="detail rise">
+            <dt>Email</dt>
+            <dd><a href="mailto:frontlinefaithmissions@gmail.com">frontlinefaithmissions@gmail.com</a></dd>
+          </div>
+          <div class="detail rise" style="--d:80ms">
+            <dt>Next trips</dt>
+            <dd>April 18&ndash;27, 2027 &middot; Peru<br>October 2027 &middot; Peru</dd>
+          </div>
+          <div class="detail rise" style="--d:160ms">
+            <dt>Status</dt>
+            <dd>A registered 501(c)(3) nonprofit organization</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__grid">
+      <div>
+        <a class="brand" href="index.html" style="margin-bottom:1.25rem">
+          <img src="assets/img/mark-white.png" alt="">
+          <span class="brand__txt">Frontline Faith<span>Missions</span></span>
+        </a>
+        <p style="color:var(--fg-on-ink-mut);max-width:32ch">Serving first responders, hospital staff and the communities they carry.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="what-we-do.html">What We Do</a></li>
+          <li><a href="get-involved.html">Get Involved</a></li>
+          <li><a href="photos.html">Photos</a></li>
+          <li><a href="give.html">Give</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="contact.html">Send us a message</a></li>
+          <li><a href="get-involved.html">Volunteer with us</a></li>
+          <li><a href="give.html">Make a donation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr__base">
+      <span>&copy; 2026 Frontline Faith Missions &middot; A registered 501(c)(3) nonprofit</span>
+      <span>Faith in God &middot; Service to Others &middot; Hope for All</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
