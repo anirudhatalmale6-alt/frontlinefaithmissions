@@ -78,7 +78,11 @@
           name: form.name.value.trim(),
           email: form.email.value.trim(),
           subject: form.subject.value.trim(),
-          message: form.message.value.trim()
+          message: form.message.value.trim(),
+          /* _subject puts what the visitor typed on the email's subject line,
+             so the inbox reads like a real message rather than a run of
+             identical "New submission" notifications. */
+          _subject: "Website: " + form.subject.value.trim()
         })
       })
         .then(function (r) {
