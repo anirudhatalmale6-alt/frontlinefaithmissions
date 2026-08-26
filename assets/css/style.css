@@ -260,7 +260,10 @@ body.nav-open .burger span:nth-child(3) { transform: rotate(-45deg); }
   min-height: min(100svh, 54rem);
   display: flex;
   align-items: center;
-  padding-block: clamp(8rem, 16vh, 12rem) clamp(4rem, 9vh, 7rem);
+  /* Kristen's hero copy is a paragraph longer than the line it replaced, so the
+     top padding gives a little back to keep the whole block above the fold on a
+     short (720px) laptop screen. */
+  padding-block: clamp(7rem, 15vh, 12rem) clamp(4rem, 9vh, 7rem);
   overflow: hidden;
   isolation: isolate;
 }
@@ -302,7 +305,8 @@ body.nav-open .burger span:nth-child(3) { transform: rotate(-45deg); }
   font-weight: 300;
   color: var(--ember-lit);
 }
-.hero .lede { max-width: 38rem; }
+.hero .lede { max-width: 41rem; }
+.hero .note { margin-top: 1.8rem; }
 .hero__cta {
   display: flex;
   flex-wrap: wrap;
@@ -404,6 +408,32 @@ body.nav-open .burger span:nth-child(3) { transform: rotate(-45deg); }
   margin: 0;
   color: var(--fg-on-bone);
 }
+/* Kristen's copy gives each item a short label and a sentence of explanation,
+   so the label takes the serif size the bare statement used to have and the
+   sentence drops back to body text. `.creed__body` keeps the pair in the second
+   grid column -- without the wrapper the h3 and p become separate grid items
+   and the paragraph falls under the number. */
+.creed__body { min-width: 0; }
+.creed h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.72rem);
+  line-height: 1.34;
+  font-weight: 300;
+  margin: 0 0 0.65rem;
+  letter-spacing: -0.01em;
+}
+.creed h3 + p {
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.62;
+  font-weight: 400;
+  color: var(--fg-on-bone-mut);
+  max-width: 60ch;
+}
+.section--deep .creed li,
+.section--deep .creed li:last-child { border-color: var(--ink-line); }
+.section--deep .creed h3 { color: var(--fg-on-ink); }
+.section--deep .creed h3 + p { color: var(--fg-on-ink-mut); }
 
 /* --- do list --- */
 .do-list { display: grid; gap: 0; margin-top: clamp(2.5rem, 5vw, 4rem); }
@@ -463,13 +493,24 @@ body.nav-open .burger span:nth-child(3) { transform: rotate(-45deg); }
 }
 
 /* --- why it matters --- */
+/* The cell gaps are the container background showing through, so any cell the
+   items don't fill reads as a hole. Column counts are therefore explicit rather
+   than auto-fit, and the last item spans two, which tiles the current SEVEN
+   items exactly at 4, 2 and 1 columns. If the number of items ever changes,
+   re-check this — auto-fit would silently leave a gap. */
 .why {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   background: var(--ink-line);
   border: 1px solid var(--ink-line);
   margin-top: clamp(2.5rem, 5vw, 3.75rem);
+}
+.why > div:last-child { grid-column: span 2; }
+@media (min-width: 64rem) { .why { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 34rem) {
+  .why { grid-template-columns: 1fr; }
+  .why > div:last-child { grid-column: auto; }
 }
 .why > div {
   background: var(--ink-soft);
@@ -477,8 +518,8 @@ body.nav-open .burger span:nth-child(3) { transform: rotate(-45deg); }
   min-height: 13rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 2rem;
+  justify-content: flex-start;
+  gap: 1.6rem;
   transition: background 380ms var(--ease);
 }
 .why > div:hover { background: #191c20; }
@@ -495,6 +536,22 @@ body.nav-open .burger span:nth-child(3) { transform: rotate(-45deg); }
   line-height: 1.32;
   font-weight: 300;
   margin: 0;
+}
+/* Same pattern as .creed: a serif label with a plain sentence beneath it. */
+.why__body { display: grid; gap: 0.65rem; }
+.why h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 1rem + 0.55vw, 1.42rem);
+  line-height: 1.28;
+  font-weight: 300;
+  margin: 0;
+}
+.why h3 + p {
+  font-family: var(--sans);
+  font-size: 0.97rem;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--fg-on-ink-mut);
 }
 
 /* --- involvement --- */
@@ -700,6 +757,38 @@ body.nav-open .burger span:nth-child(3) { transform: rotate(-45deg); }
 .prose h3 { margin: 2.75rem 0 0.9rem; }
 .prose h3:first-child { margin-top: 0; }
 
+/* Kristen's founding story runs long enough to want a centred measure of its
+   own rather than the two-column treatment the shorter copy used. */
+.prose--article { max-width: 42rem; margin-inline: auto; }
+.prose--article p + p { margin-top: 1.25rem; }
+.prose--article .pullquote {
+  margin-block: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(1.35rem, 1.1rem + 1.1vw, 1.95rem);
+}
+.prose__sign {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--bone-line);
+  font: 600 0.83rem/1.6 var(--cond);
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+  color: var(--fg-on-bone-mut);
+}
+.prose__sign span { display: block; color: var(--ember); }
+
+/* closing line beneath a section — the sentence Kristen ends on */
+.closer {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.2rem, 1.02rem + 0.8vw, 1.6rem);
+  line-height: 1.42;
+  max-width: 46rem;
+  margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+  color: var(--fg-on-ink-mut);
+}
+.section--bone .closer { color: var(--fg-on-bone-mut); }
+
 /* --- placeholder / coming-soon panel --- */
 .soon {
   border: 1px dashed var(--bone-line);
@@ -856,6 +945,7 @@ body.nav-open .burger span:nth-child(3) { transform: rotate(-45deg); }
 .hero .rise:nth-child(2) { animation-delay: 200ms; }
 .hero .rise:nth-child(3) { animation-delay: 320ms; }
 .hero .rise:nth-child(4) { animation-delay: 440ms; }
+.hero .rise:nth-child(5) { animation-delay: 560ms; }
 @keyframes heroIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {

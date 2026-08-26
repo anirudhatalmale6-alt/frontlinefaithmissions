@@ -54,10 +54,24 @@ Two things are easy to get wrong:
 the six inner pages from one shared header/footer so the nav can't drift. Its
 output is committed as plain static HTML — you do not need the generator to work
 on this site, and editing the HTML by hand is fine. But if you *do* run it, it
-rewrites `index.html`'s nav and footer from its own definitions, so any hand
-edits to those two blocks on the homepage will be overwritten. Everything it
-writes must stay safe to run twice; a non-idempotent insert here once put three
-duplicate footer links into production.
+rewrites parts of `index.html` from its own definitions, so hand edits to those
+blocks on the homepage will be overwritten. They are marked in the source:
+
+    <nav class="nav" id="nav"> … </nav>     header nav
+    <footer class="ftr"> … </footer>        footer
+    <!-- ffm:who -->  … <!-- /ffm:who -->   Who We Are
+    <!-- ffm:do -->   … <!-- /ffm:do -->    What We Do
+    <!-- ffm:why -->  … <!-- /ffm:why -->   Why It Matters
+
+Those three lists appear on both the homepage and an inner page, so they live in
+the generator as data (`WHO`, `DO`, `WHY`) and are written into both. Change the
+wording there, not in the HTML. Everything the generator writes must stay safe to
+run twice; a non-idempotent insert here once put three duplicate footer links into
+production.
+
+`<!-- ffm:hero -->` marks the homepage hero, which is *not* generated — the
+marker is only there so the alternative headline options can be swapped in and
+out cleanly.
 
 **`https://www`.** Only the bare domain has a certificate. `www` resolves but
 warns, which is a deliberate decision by the owner rather than a fault — see
